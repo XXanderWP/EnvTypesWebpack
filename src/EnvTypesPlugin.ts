@@ -31,6 +31,11 @@ export interface EnvTypesPluginOptions {
    * @default false
    */
   silent?: boolean;
+
+  /** Disable partial types
+   * @default false
+   */
+  disablePartialType?: boolean;
 }
 
 /**
@@ -82,6 +87,7 @@ export class EnvTypesPlugin {
       outputPath: options.outputPath,
       generatorScript: options.generatorScript || defaultGeneratorScript,
       silent: options.silent || false,
+      disablePartialType: options.disablePartialType || false,
     };
 
     this.outputAbsolutePath = path.resolve(this.options.outputPath);
@@ -120,6 +126,8 @@ export class EnvTypesPlugin {
       const env = {
         ENV_FILES: this.options.envFiles.join(','),
         OUTPUT_PATH: this.options.outputPath,
+        DISABLE_PARTIAL_TYPE: this.options.disablePartialType ? '1' : '0',
+        SILENT: this.options.silent ? '1' : '0',
       };
 
       execSync(`node ${this.options.generatorScript}`, {
