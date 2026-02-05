@@ -19,6 +19,10 @@ export interface EnvTypesGeneratorOptions {
   envFiles: string[];
   /** Path to output .d.ts file */
   outputPath: string;
+  /** Disable partial types
+   * @default false
+   */
+  disablePartialType?: boolean;
 }
 
 /**
@@ -34,10 +38,12 @@ export interface EnvTypesGeneratorOptions {
 export class EnvTypesGenerator {
   private readonly envFiles: string[];
   private readonly outputPath: string;
+  private readonly disablePartialType: boolean;
 
   constructor(options: EnvTypesGeneratorOptions) {
     this.envFiles = options.envFiles;
     this.outputPath = path.resolve(process.cwd(), options.outputPath);
+    this.disablePartialType = options.disablePartialType ?? false;
   }
 
   /**
@@ -129,11 +135,11 @@ export class EnvTypesGenerator {
     return entries
       .map(({ key, comment }) => {
         if (!comment) {
-          return `    ${key}?: string;`;
+          return `    ${key}${this.disablePartialType ? '' : '?'}: string;`;
         }
 
         const jsdoc = this.generateJSDoc(comment);
-        return `${jsdoc}\n    ${key}?: string;`;
+        return `${jsdoc}\n    ${key}${this.disablePartialType ? '' : '?'}: string;`;
       })
       .join('\n');
   }
