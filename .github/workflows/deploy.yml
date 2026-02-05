@@ -48,7 +48,7 @@ jobs:
           npm publish --access=public
     
       - name: Publish to npm (beta)
-        if: github.ref == 'refs/heads/beta'
+        if: steps.check_version.outputs.exists == 'false' && github.ref == 'refs/heads/beta'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
