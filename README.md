@@ -36,7 +36,7 @@ yarn add -D @xxanderwp/env-types-webpack-plugin
 
 ```javascript
 // webpack.config.js
-const EnvTypesPlugin = require('@xxanderwp/env-types-webpack-plugin');
+const EnvTypesPlugin = require('@xxanderwp/env-types-webpack-plugin').EnvTypesPlugin;
 
 module.exports = {
   // ...
@@ -48,7 +48,7 @@ module.exports = {
 
 ```javascript
 // webpack.config.js
-const EnvTypesPlugin = require('@xxanderwp/env-types-webpack-plugin');
+const EnvTypesPlugin = require('@xxanderwp/env-types-webpack-plugin').EnvTypesPlugin;
 
 module.exports = {
   // ...
