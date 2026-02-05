@@ -1,9 +1,11 @@
 # EnvTypesWebpack
+<center>
 
-[![npm version](https://img.shields.io/npm/v/EnvTypesWebpack.svg)](https://www.npmjs.com/package/EnvTypesWebpack)
+[![npm version](https://img.shields.io/npm/v/@xxanderwp/env-types-webpack-plugin.svg)](https://www.npmjs.com/package/EnvTypesWebpack)
 [![Tests](https://github.com/XXanderWP/EnvTypesWebpack/workflows/Tests/badge.svg)](https://github.com/XXanderWP/EnvTypesWebpack/actions)
-[![codecov](https://codecov.io/gh/XXanderWP/EnvTypesWebpack/branch/main/graph/badge.svg)](https://codecov.io/gh/XXanderWP/EnvTypesWebpack)
-[![license](https://img.shields.io/npm/l/EnvTypesWebpack.svg)](https://github.com/XXanderWP/EnvTypesWebpack/blob/main/LICENSE)
+[![license](https://img.shields.io/github/license/XXanderWP/EnvTypesWebpack.svg)](https://github.com/XXanderWP/EnvTypesWebpack/blob/main/LICENSE)
+
+</center>
 
 Webpack plugin that automatically generates TypeScript definitions for environment variables from `.env` files.
 
