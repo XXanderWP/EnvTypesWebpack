@@ -1,8 +1,4 @@
-import { resolve as _resolve } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = _resolve(__filename, '..');
+const path = require('path');
 
 const config = {
   entry: {
@@ -10,7 +6,7 @@ const config = {
     EnvTypesGenerator: './src/EnvTypesGenerator.ts',
   },
   output: {
-    path: _resolve(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist'),
     filename: '[name].js',
     library: {
       type: 'commonjs2',

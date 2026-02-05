@@ -45,6 +45,7 @@ export default [
       '@typescript-eslint/no-unused-expressions': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
       'no-case-declarations': 'off',
+      '@typescript-eslint/no-var-requires': 'off',
       'prefer-const': 'error',
     },
   },
