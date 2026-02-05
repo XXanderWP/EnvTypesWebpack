@@ -10,7 +10,6 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: {
-    react,
     '@typescript-eslint': typescriptEslint,
   },
   env: {
