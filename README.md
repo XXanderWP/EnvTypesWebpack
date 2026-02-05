@@ -166,7 +166,7 @@ Make sure your `tsconfig.json` includes the generated types:
 
 ## License
 
-MIT © [Your Name]
+MIT © XXanderWP
 
 ## Contributing
 
