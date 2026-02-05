@@ -1,0 +1,35 @@
+# Source files (we only publish dist/)
+src/
+node_modules/
+tsconfig.json
+webpack.config.js
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+/.eslintrc.js
+/.prettierrc
+/.prettierignore
+
+# Tests
+/jest.config.js
+test/
+*.test.ts
+*.spec.ts
+coverage/
+/*.tgz
+
+# CI/CD
+.github/
+.travis.yml
+.gitlab-ci.yml
+
+# Git
+.git/
+.gitignore
+
+# Logs
+*.log
+npm-debug.log*
