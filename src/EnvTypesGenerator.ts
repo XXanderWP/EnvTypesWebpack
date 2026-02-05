@@ -19,6 +19,12 @@ export interface EnvTypesGeneratorOptions {
   envFiles: string[];
   /** Path to output .d.ts file */
   outputPath: string;
+  /** Disable partial types
+   * @default false
+   */
+  disablePartialType?: boolean;
+  /** Disable console logs */
+  silent?: boolean;
 }
 
 /**
@@ -34,10 +40,14 @@ export interface EnvTypesGeneratorOptions {
 export class EnvTypesGenerator {
   private readonly envFiles: string[];
   private readonly outputPath: string;
+  private readonly disablePartialType: boolean;
+  private readonly silent: boolean;
 
   constructor(options: EnvTypesGeneratorOptions) {
     this.envFiles = options.envFiles;
     this.outputPath = path.resolve(process.cwd(), options.outputPath);
+    this.disablePartialType = options.disablePartialType ?? false;
+    this.silent = options.silent ?? false;
   }
 
   /**
@@ -129,11 +139,11 @@ export class EnvTypesGenerator {
     return entries
       .map(({ key, comment }) => {
         if (!comment) {
-          return `    ${key}?: string;`;
+          return `    ${key}${this.disablePartialType ? '' : '?'}: string;`;
         }
 
         const jsdoc = this.generateJSDoc(comment);
-        return `${jsdoc}\n    ${key}?: string;`;
+        return `${jsdoc}\n    ${key}${this.disablePartialType ? '' : '?'}: string;`;
       })
       .join('\n');
   }
@@ -233,6 +243,8 @@ export {};
 if (require.main === module) {
   const envFiles = (process.env.ENV_FILES || '.env.example,.env').split(',');
   const outputPath = process.env.OUTPUT_PATH;
+  const disablePartialType = process.env.DISABLE_PARTIAL_TYPE === '1';
+  const silent = process.env.SILENT === '1';
 
   if (!outputPath) {
     console.error(
@@ -241,7 +253,12 @@ if (require.main === module) {
     process.exit(1);
   }
 
-  const generator = new EnvTypesGenerator({ envFiles, outputPath });
+  const generator = new EnvTypesGenerator({
+    envFiles,
+    outputPath,
+    disablePartialType,
+    silent,
+  });
   generator.generate();
 }
 

@@ -46,9 +46,18 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish --access=public
+
+      - name: Mark existing version as latest
+        if: steps.check_version.outputs.exists == 'true' && github.ref == 'refs/heads/main'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          npm dist-tag add "$PACKAGE_NAME@$PACKAGE_VERSION" latest
     
       - name: Publish to npm (beta)
-        if: github.ref == 'refs/heads/beta'
+        if: steps.check_version.outputs.exists == 'false' && github.ref == 'refs/heads/beta'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
