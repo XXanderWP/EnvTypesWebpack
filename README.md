@@ -1,9 +1,9 @@
-# env-types-webpack-plugin
+# EnvTypesWebpack
 
-[![npm version](https://img.shields.io/npm/v/env-types-webpack-plugin.svg)](https://www.npmjs.com/package/env-types-webpack-plugin)
-[![Tests](https://github.com/yourusername/env-types-webpack-plugin/workflows/Tests/badge.svg)](https://github.com/yourusername/env-types-webpack-plugin/actions)
-[![codecov](https://codecov.io/gh/yourusername/env-types-webpack-plugin/branch/main/graph/badge.svg)](https://codecov.io/gh/yourusername/env-types-webpack-plugin)
-[![license](https://img.shields.io/npm/l/env-types-webpack-plugin.svg)](https://github.com/yourusername/env-types-webpack-plugin/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/EnvTypesWebpack.svg)](https://www.npmjs.com/package/EnvTypesWebpack)
+[![Tests](https://github.com/XXanderWP/EnvTypesWebpack/workflows/Tests/badge.svg)](https://github.com/XXanderWP/EnvTypesWebpack/actions)
+[![codecov](https://codecov.io/gh/XXanderWP/EnvTypesWebpack/branch/main/graph/badge.svg)](https://codecov.io/gh/XXanderWP/EnvTypesWebpack)
+[![license](https://img.shields.io/npm/l/EnvTypesWebpack.svg)](https://github.com/XXanderWP/EnvTypesWebpack/blob/main/LICENSE)
 
 Webpack plugin that automatically generates TypeScript definitions for environment variables from `.env` files.
 
@@ -17,34 +17,36 @@ Webpack plugin that automatically generates TypeScript definitions for environme
 - 💪 **Zero dependencies** - No external runtime dependencies
 
 ## Installation
+
 ```bash
-npm install --save-dev env-types-webpack-plugin
+npm install --save-dev @xxanderwp/env-types-webpack-plugin
 ```
 
 Or with yarn:
+
 ```bash
-yarn add -D env-types-webpack-plugin
+yarn add -D @xxanderwp/env-types-webpack-plugin
 ```
 
 ## Usage
 
 ### Basic Usage
+
 ```javascript
 // webpack.config.js
-const EnvTypesPlugin = require('env-types-webpack-plugin');
+const EnvTypesPlugin = require('@xxanderwp/env-types-webpack-plugin');
 
 module.exports = {
   // ...
-  plugins: [
-    new EnvTypesPlugin('src/types/env.d.ts'),
-  ],
+  plugins: [new EnvTypesPlugin('src/types/env.d.ts')],
 };
 ```
 
 ### Advanced Configuration
+
 ```javascript
 // webpack.config.js
-const EnvTypesPlugin = require('env-types-webpack-plugin');
+const EnvTypesPlugin = require('@xxanderwp/env-types-webpack-plugin');
 
 module.exports = {
   // ...
@@ -52,10 +54,10 @@ module.exports = {
     new EnvTypesPlugin({
       // Path to output .d.ts file (required)
       outputPath: 'src/types/env.d.ts',
-      
+
       // List of .env files to watch (optional)
       envFiles: ['.env.local', '.env'],
-      
+
       // Disable console output (optional)
       silent: false,
     }),
@@ -66,6 +68,7 @@ module.exports = {
 ## Example
 
 ### Input (`.env` file):
+
 ```bash
 # Database configuration
 DB_HOST=localhost
@@ -76,6 +79,7 @@ API_KEY=your-api-key # Production key
 ```
 
 ### Output (`env.d.ts` file):
+
 ```typescript
 // ⚠️ AUTO-GENERATED FILE — DO NOT EDIT
 // Source: .env
@@ -103,6 +107,7 @@ export {};
 ```
 
 ### Usage in Your Code:
+
 ```typescript
 // Now you have full TypeScript autocomplete!
 const dbHost = process.env.DB_HOST; // Type: string | undefined
@@ -115,20 +120,21 @@ const apiKey = process.env.API_KEY; // Type: string | undefined
 
 #### Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `outputPath` | `string` | **required** | Path to output `.d.ts` file |
-| `envFiles` | `string[]` | `['.env', '.env.example']` | List of `.env` files to watch (in priority order) |
-| `generatorScript` | `string` | `'dist/EnvTypesGenerator.js'` | Path to custom generator script |
-| `silent` | `boolean` | `false` | Disable console logs |
+| Option            | Type       | Default                       | Description                                       |
+| ----------------- | ---------- | ----------------------------- | ------------------------------------------------- |
+| `outputPath`      | `string`   | **required**                  | Path to output `.d.ts` file                       |
+| `envFiles`        | `string[]` | `['.env', '.env.example']`    | List of `.env` files to watch (in priority order) |
+| `generatorScript` | `string`   | `'dist/EnvTypesGenerator.js'` | Path to custom generator script                   |
+| `silent`          | `boolean`  | `false`                       | Disable console logs                              |
 
 #### Shorthand
 
 You can pass a string directly as a shorthand for `outputPath`:
+
 ```javascript
-new EnvTypesPlugin('src/types/env.d.ts')
+new EnvTypesPlugin('src/types/env.d.ts');
 // Equivalent to:
-new EnvTypesPlugin({ outputPath: 'src/types/env.d.ts' })
+new EnvTypesPlugin({ outputPath: 'src/types/env.d.ts' });
 ```
 
 ## How It Works
@@ -141,6 +147,7 @@ new EnvTypesPlugin({ outputPath: 'src/types/env.d.ts' })
 ## TypeScript Configuration
 
 Make sure your `tsconfig.json` includes the generated types:
+
 ```json
 {
   "compilerOptions": {
