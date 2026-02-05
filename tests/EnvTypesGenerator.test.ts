@@ -168,7 +168,7 @@ DB_HOST=localhost
       // Generate first time
       generator.generate();
       const firstContent = fs.readFileSync(outputFile, 'utf-8');
-      
+
       // Mock console.log to capture output
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
