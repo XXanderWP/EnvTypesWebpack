@@ -1,6 +1,6 @@
 {
   "name": "@xxanderwp/env-types-webpack-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Webpack plugin that automatically generates TypeScript definitions for environment variables from .env files",
   "main": "dist/EnvTypesPlugin.js",
   "types": "dist/EnvTypesPlugin.d.ts",
