@@ -25,6 +25,10 @@ export interface EnvTypesGeneratorOptions {
   disablePartialType?: boolean;
   /** Disable console logs */
   silent?: boolean;
+  /** Add `export {};` at end
+   * @default false
+   */
+  addExportEnds?: boolean;
 }
 
 /**
@@ -42,12 +46,14 @@ export class EnvTypesGenerator {
   private readonly outputPath: string;
   private readonly disablePartialType: boolean;
   private readonly silent: boolean;
+  private readonly addExportEnds: boolean;
 
   constructor(options: EnvTypesGeneratorOptions) {
     this.envFiles = options.envFiles;
     this.outputPath = path.resolve(process.cwd(), options.outputPath);
     this.disablePartialType = options.disablePartialType ?? false;
     this.silent = options.silent ?? false;
+    this.addExportEnds = options.addExportEnds ?? false;
   }
 
   /**
@@ -180,7 +186,7 @@ ${body}
   }
 }
 
-export {};
+${this.addExportEnds ? 'export {};' : ''}
 `;
   }
 
@@ -212,7 +218,7 @@ export {};
     const dir = path.dirname(this.outputPath);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
-      console.log(`[env-types] Created directory: ${dir}`);
+      if (!this.silent) console.log(`[env-types] Created directory: ${dir}`);
     }
   }
 
@@ -226,16 +232,17 @@ export {};
     const dts = this.generateDTS(entries, envFile);
 
     if (!this.shouldUpdate(dts)) {
-      console.log('[env-types] Types are up to date, skipping write');
+      if (!this.silent)
+        console.log('[env-types] Types are up to date, skipping write');
       return;
     }
 
     this.ensureOutputDirectory();
     fs.writeFileSync(this.outputPath, dts, 'utf-8');
-
-    console.log(
-      `[env-types] Generated ${entries.length} keys from ${envFile} → ${this.outputPath}`
-    );
+    if (!this.silent)
+      console.log(
+        `[env-types] Generated ${entries.length} keys from ${envFile} → ${this.outputPath}`
+      );
   }
 }
 
