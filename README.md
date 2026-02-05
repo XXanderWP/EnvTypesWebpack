@@ -127,6 +127,7 @@ const apiKey = process.env.API_KEY; // Type: string | undefined
 | `outputPath`      | `string`   | **required**                  | Path to output `.d.ts` file                       |
 | `envFiles`        | `string[]` | `['.env', '.env.example']`    | List of `.env` files to watch (in priority order) |
 | `generatorScript` | `string`   | `'dist/EnvTypesGenerator.js'` | Path to custom generator script                   |
+| `disablePartialType` | `boolean`   | `false` | Disable partial types                   |
 | `silent`          | `boolean`  | `false`                       | Disable console logs                              |
 
 #### Shorthand
