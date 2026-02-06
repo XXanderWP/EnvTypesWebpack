@@ -10,6 +10,8 @@ export interface EnvEntry {
   key: string;
   /** JSDoc comment describing the variable */
   comment: string | null;
+  /** Value for useValuesAsTypes mode */
+  value: string;
 }
 
 /**
@@ -30,6 +32,7 @@ export class EnvTypesGenerator {
   private readonly addExportEnds: boolean;
   private readonly interface: string;
   private readonly namespace: string;
+  private readonly useValuesAsTypes: boolean;
 
   constructor(options: EnvTypesGeneratorOptions) {
     this.envFiles = options.envFiles || ['.env', '.env.example'];
@@ -39,6 +42,7 @@ export class EnvTypesGenerator {
     this.addExportEnds = options.addExportEnds ?? false;
     this.interface = options.interface || 'ProcessEnv';
     this.namespace = options.namespace || 'NodeJS';
+    this.useValuesAsTypes = options.useValuesAsTypes ?? false;
   }
 
   /**
@@ -103,6 +107,7 @@ export class EnvTypesGenerator {
       entries.push({
         key,
         comment: comments.length ? comments.join('\n') : null,
+        value: valuePart.split('#')[0].trim(),
       });
 
       commentBuffer = [];
@@ -128,13 +133,23 @@ export class EnvTypesGenerator {
    */
   private generateInterfaceBody(entries: EnvEntry[]): string {
     return entries
-      .map(({ key, comment }) => {
+      .map(({ key, comment, value }) => {
+        // Определяем тип или конкретное значение
+        let typeOrValue: string;
+        if (this.useValuesAsTypes) {
+          typeOrValue = `"${value.replace(/"/g, '\\"')}"`;
+        } else {
+          typeOrValue = 'string';
+        }
+
+        const optional = this.disablePartialType ? '' : '?';
+
         if (!comment) {
-          return `    ${key}${this.disablePartialType ? '' : '?'}: string;`;
+          return `    ${key}${optional}: ${typeOrValue};`;
         }
 
         const jsdoc = this.generateJSDoc(comment);
-        return `${jsdoc}\n    ${key}${this.disablePartialType ? '' : '?'}: string;`;
+        return `${jsdoc}\n    ${key}${optional}: ${typeOrValue};`;
       })
       .join('\n');
   }
@@ -240,6 +255,7 @@ if (require.main === module) {
   const addExportEnds = process.env.ADD_END === '1';
   const interfaceName = process.env.INTERFACE || 'ProcessEnv';
   const namespace = process.env.NAMESPACE || 'NodeJS';
+  const useValuesAsTypes = process.env.USE_VALUES_AS_TYPES === '1';
 
   if (!outputPath) {
     console.error(
@@ -256,6 +272,7 @@ if (require.main === module) {
     addExportEnds,
     interface: interfaceName,
     namespace,
+    useValuesAsTypes,
   });
   generator.generate();
 }

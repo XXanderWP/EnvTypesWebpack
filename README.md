@@ -140,6 +140,7 @@ const apiKey = process.env.API_KEY; // Type: string | undefined
 | `addExportEnds`          | `boolean`  | `false`                       | Add `export {};` at end                              |
 | `namespace`          | `string`  | `NodeJS`                       | Optional namespace for the generated types                              |
 | `interface`          | `string`  | `ProcessEnv`                       | Optional interface name for the generated types                              |
+| `useValuesAsTypes`          | `boolean`  | `false`                       | Use values as types instead of string literals                              |
 
 #### Shorthand
 
