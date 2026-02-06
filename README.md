@@ -130,6 +130,8 @@ const apiKey = process.env.API_KEY; // Type: string | undefined
 | `disablePartialType` | `boolean`   | `false` | Disable partial types                   |
 | `silent`          | `boolean`  | `false`                       | Disable console logs                              |
 | `addExportEnds`          | `boolean`  | `false`                       | Add `export {};` at end                              |
+| `namespace`          | `string`  | `NodeJS`                       | Optional namespace for the generated types                              |
+| `interface`          | `string`  | `ProcessEnv`                       | Optional interface name for the generated types                              |
 
 #### Shorthand
 
