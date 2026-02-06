@@ -3,45 +3,7 @@ import * as path from 'path';
 import { execSync } from 'child_process';
 import type { Compiler, Compilation } from 'webpack';
 import webpack from 'webpack';
-
-/**
- * Configuration options for EnvTypesPlugin
- */
-export interface EnvTypesPluginOptions {
-  /**
-   * List of .env files to watch (in priority order)
-   * @default ['.env', '.env.example']
-   */
-  envFiles?: string[];
-
-  /**
-   * Path to output .d.ts file (required)
-   * @example 'src/types/env.d.ts'
-   */
-  outputPath: string;
-
-  /**
-   * Path to generator script
-   * @default 'node_modules/env-types-webpack-plugin/dist/EnvTypesGenerator.js'
-   */
-  generatorScript?: string;
-
-  /**
-   * Disable console logs
-   * @default false
-   */
-  silent?: boolean;
-
-  /** Disable partial types
-   * @default false
-   */
-  disablePartialType?: boolean;
-
-  /** Add `export {};` at end
-   * @default false
-   */
-  addExportEnds?: boolean;
-}
+import { EnvTypesPluginOptions } from './types/EnvTypesPlugin';
 
 /**
  * Webpack plugin that automatically generates TypeScript definitions

@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { EnvTypesGeneratorOptions } from './types/EnvTypesGenerator';
 
 /**
  * Represents a single environment variable entry
@@ -9,26 +10,6 @@ export interface EnvEntry {
   key: string;
   /** JSDoc comment describing the variable */
   comment: string | null;
-}
-
-/**
- * Configuration options for EnvTypesGenerator
- */
-export interface EnvTypesGeneratorOptions {
-  /** List of .env files to search (in priority order) */
-  envFiles: string[];
-  /** Path to output .d.ts file */
-  outputPath: string;
-  /** Disable partial types
-   * @default false
-   */
-  disablePartialType?: boolean;
-  /** Disable console logs */
-  silent?: boolean;
-  /** Add `export {};` at end
-   * @default false
-   */
-  addExportEnds?: boolean;
 }
 
 /**
@@ -49,7 +30,7 @@ export class EnvTypesGenerator {
   private readonly addExportEnds: boolean;
 
   constructor(options: EnvTypesGeneratorOptions) {
-    this.envFiles = options.envFiles;
+    this.envFiles = options.envFiles || ['.env', '.env.example'];
     this.outputPath = path.resolve(process.cwd(), options.outputPath);
     this.disablePartialType = options.disablePartialType ?? false;
     this.silent = options.silent ?? false;
