@@ -3,40 +3,7 @@ import * as path from 'path';
 import { execSync } from 'child_process';
 import type { Compiler, Compilation } from 'webpack';
 import webpack from 'webpack';
-
-/**
- * Configuration options for EnvTypesPlugin
- */
-export interface EnvTypesPluginOptions {
-  /**
-   * List of .env files to watch (in priority order)
-   * @default ['.env', '.env.example']
-   */
-  envFiles?: string[];
-
-  /**
-   * Path to output .d.ts file (required)
-   * @example 'src/types/env.d.ts'
-   */
-  outputPath: string;
-
-  /**
-   * Path to generator script
-   * @default 'node_modules/env-types-webpack-plugin/dist/EnvTypesGenerator.js'
-   */
-  generatorScript?: string;
-
-  /**
-   * Disable console logs
-   * @default false
-   */
-  silent?: boolean;
-
-  /** Disable partial types
-   * @default false
-   */
-  disablePartialType?: boolean;
-}
+import { EnvTypesPluginOptions } from './types/EnvTypesPlugin';
 
 /**
  * Webpack plugin that automatically generates TypeScript definitions
@@ -88,6 +55,7 @@ export class EnvTypesPlugin {
       generatorScript: options.generatorScript || defaultGeneratorScript,
       silent: options.silent || false,
       disablePartialType: options.disablePartialType || false,
+      addExportEnds: options.addExportEnds || false,
     };
 
     this.outputAbsolutePath = path.resolve(this.options.outputPath);
@@ -128,6 +96,7 @@ export class EnvTypesPlugin {
         OUTPUT_PATH: this.options.outputPath,
         DISABLE_PARTIAL_TYPE: this.options.disablePartialType ? '1' : '0',
         SILENT: this.options.silent ? '1' : '0',
+        ADD_END: this.options.addExportEnds ? '1' : '0',
       };
 
       execSync(`node ${this.options.generatorScript}`, {
