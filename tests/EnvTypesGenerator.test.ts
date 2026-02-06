@@ -24,6 +24,7 @@ describe('EnvTypesGenerator', () => {
   describe('constructor', () => {
     it('should create instance with valid options', () => {
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: ['.env'],
         outputPath: 'test.d.ts',
       });
@@ -44,6 +45,7 @@ API_KEY=secret
       fs.writeFileSync(envFile, envContent);
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: outputFile,
       });
@@ -75,6 +77,7 @@ DB_PORT=5432
       fs.writeFileSync(envFile, envContent);
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: outputFile,
       });
@@ -97,6 +100,7 @@ DB_PORT=5432
       fs.writeFileSync(envFile, envContent);
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: outputFile,
       });
@@ -117,6 +121,7 @@ DB_PORT=5432
       fs.writeFileSync(envFile, envContent);
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: outputFile,
       });
@@ -142,6 +147,7 @@ DB_HOST=localhost
       fs.writeFileSync(envFile, envContent);
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: outputFile,
       });
@@ -193,6 +199,7 @@ DB_HOST=localhost
       fs.writeFileSync(envFile, 'DB_HOST=localhost');
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: nestedOutput,
       });
@@ -207,6 +214,7 @@ DB_HOST=localhost
     it('should throw error if no env file found', () => {
       // Arrange
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: ['.env.nonexistent'],
         outputPath: outputFile,
       });
@@ -224,6 +232,7 @@ DB_HOST=localhost
       fs.writeFileSync(env2, 'PROD_VAR=prod');
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [env1, env2],
         outputPath: outputFile,
       });
@@ -263,6 +272,30 @@ DB_HOST=localhost
       expect(content).toContain('Line 3 of comment');
     });
 
+    it('should handle useValuesAsTypes option', () => {
+      // Arrange
+      const envContent = `
+DB_HOST=localhost
+`.trim();
+
+      fs.writeFileSync(envFile, envContent);
+
+      const generator = new EnvTypesGenerator({
+        silent: true,
+        envFiles: [envFile],
+        outputPath: outputFile,
+        useValuesAsTypes: true,
+      });
+
+      // Act
+      generator.generate();
+
+      // Assert
+      const content = fs.readFileSync(outputFile, 'utf-8');
+      expect(content).toContain('DB_HOST');
+      expect(content).toContain('"localhost"');
+    });
+
     it('should handle values with equals signs', () => {
       // Arrange
       const envContent = 'CONNECTION_STRING=host=localhost;port=5432';
@@ -270,6 +303,7 @@ DB_HOST=localhost
       fs.writeFileSync(envFile, envContent);
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: outputFile,
       });
@@ -287,6 +321,7 @@ DB_HOST=localhost
       fs.writeFileSync(envFile, 'DB_HOST=localhost');
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: outputFile,
       });
@@ -304,6 +339,7 @@ DB_HOST=localhost
       fs.writeFileSync(envFile, 'DB_HOST=localhost');
 
       const generator = new EnvTypesGenerator({
+        silent: true,
         envFiles: [envFile],
         outputPath: outputFile,
       });

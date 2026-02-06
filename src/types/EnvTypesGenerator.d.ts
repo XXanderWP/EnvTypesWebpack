@@ -36,4 +36,9 @@ export interface EnvTypesGeneratorOptions {
    * @default "ProcessEnv"
    */
   interface?: string;
+  /** Use values as types instead of string literals
+   * @default false
+   * If true, the generated types will use the actual values from the .env files as types instead of string literals. For example, if you have a variable `API_URL=http://localhost:3000`, the generated type will be `API_URL: "http://localhost:3000"` instead of `API_URL: string`.
+   */
+  useValuesAsTypes?: boolean;
 }

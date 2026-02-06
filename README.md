@@ -1,11 +1,19 @@
 # EnvTypesWebpack
+
 <center>
 
-[![npm version](https://img.shields.io/npm/v/@xxanderwp/env-types-webpack-plugin.svg)](https://www.npmjs.com/package/EnvTypesWebpack)
+  <img src="./icon.png" width="50%" />
+
+</center>
+<center>
+
+[![npm version](https://img.shields.io/npm/v/@xxanderwp/env-types-webpack-plugin.svg)](https://www.npmjs.com/package/@xxanderwp/env-types-webpack-plugin)
+![NPM Downloads](https://img.shields.io/npm/dm/%40xxanderwp%2Fenv-types-webpack-plugin)
 [![Tests](https://github.com/XXanderWP/EnvTypesWebpack/workflows/Tests/badge.svg)](https://github.com/XXanderWP/EnvTypesWebpack/actions)
 [![license](https://img.shields.io/github/license/XXanderWP/EnvTypesWebpack.svg)](https://github.com/XXanderWP/EnvTypesWebpack/blob/main/LICENSE)
 
 </center>
+
 
 Webpack plugin that automatically generates TypeScript definitions for environment variables from `.env` files.
 
@@ -132,6 +140,7 @@ const apiKey = process.env.API_KEY; // Type: string | undefined
 | `addExportEnds`          | `boolean`  | `false`                       | Add `export {};` at end                              |
 | `namespace`          | `string`  | `NodeJS`                       | Optional namespace for the generated types                              |
 | `interface`          | `string`  | `ProcessEnv`                       | Optional interface name for the generated types                              |
+| `useValuesAsTypes`          | `boolean`  | `false`                       | Use values as types instead of string literals                              |
 
 #### Shorthand
 
