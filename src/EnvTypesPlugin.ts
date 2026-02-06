@@ -56,6 +56,8 @@ export class EnvTypesPlugin {
       silent: options.silent || false,
       disablePartialType: options.disablePartialType || false,
       addExportEnds: options.addExportEnds || false,
+      interface: options.interface || 'ProcessEnv',
+      namespace: options.namespace || 'NodeJS',
     };
 
     this.outputAbsolutePath = path.resolve(this.options.outputPath);
@@ -97,6 +99,8 @@ export class EnvTypesPlugin {
         DISABLE_PARTIAL_TYPE: this.options.disablePartialType ? '1' : '0',
         SILENT: this.options.silent ? '1' : '0',
         ADD_END: this.options.addExportEnds ? '1' : '0',
+        INTERFACE: this.options.interface,
+        NAMESPACE: this.options.namespace,
       };
 
       execSync(`node ${this.options.generatorScript}`, {

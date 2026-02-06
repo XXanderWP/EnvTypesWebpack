@@ -28,6 +28,8 @@ export class EnvTypesGenerator {
   private readonly disablePartialType: boolean;
   private readonly silent: boolean;
   private readonly addExportEnds: boolean;
+  private readonly interface: string;
+  private readonly namespace: string;
 
   constructor(options: EnvTypesGeneratorOptions) {
     this.envFiles = options.envFiles || ['.env', '.env.example'];
@@ -35,6 +37,8 @@ export class EnvTypesGenerator {
     this.disablePartialType = options.disablePartialType ?? false;
     this.silent = options.silent ?? false;
     this.addExportEnds = options.addExportEnds ?? false;
+    this.interface = options.interface || 'ProcessEnv';
+    this.namespace = options.namespace || 'NodeJS';
   }
 
   /**
@@ -161,8 +165,8 @@ export class EnvTypesGenerator {
 // Source: ${sourceFile}
 // ${this.generateContent()}
 
-declare namespace NodeJS {
-  interface ProcessEnv {
+declare namespace ${this.namespace} {
+  interface ${this.interface} {
 ${body}
   }
 }
@@ -234,6 +238,8 @@ if (require.main === module) {
   const disablePartialType = process.env.DISABLE_PARTIAL_TYPE === '1';
   const silent = process.env.SILENT === '1';
   const addExportEnds = process.env.ADD_END === '1';
+  const interfaceName = process.env.INTERFACE || 'ProcessEnv';
+  const namespace = process.env.NAMESPACE || 'NodeJS';
 
   if (!outputPath) {
     console.error(
@@ -248,6 +254,8 @@ if (require.main === module) {
     disablePartialType,
     silent,
     addExportEnds,
+    interface: interfaceName,
+    namespace,
   });
   generator.generate();
 }
