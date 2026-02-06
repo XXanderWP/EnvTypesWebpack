@@ -233,6 +233,7 @@ if (require.main === module) {
   const outputPath = process.env.OUTPUT_PATH;
   const disablePartialType = process.env.DISABLE_PARTIAL_TYPE === '1';
   const silent = process.env.SILENT === '1';
+  const addExportEnds = process.env.ADD_END === '1';
 
   if (!outputPath) {
     console.error(
@@ -246,6 +247,7 @@ if (require.main === module) {
     outputPath,
     disablePartialType,
     silent,
+    addExportEnds,
   });
   generator.generate();
 }
