@@ -28,4 +28,12 @@ export interface EnvTypesGeneratorOptions {
    * @default false
    */
   addExportEnds?: boolean;
+  /** Optional namespace for the generated types
+   * @default "NodeJS"
+   */
+  namespace?: string;
+  /** Optional interface name for the generated types
+   * @default "ProcessEnv"
+   */
+  interface?: string;
 }
