@@ -58,6 +58,7 @@ export class EnvTypesPlugin {
       addExportEnds: options.addExportEnds || false,
       interface: options.interface || 'ProcessEnv',
       namespace: options.namespace || 'NodeJS',
+      useValuesAsTypes: options.useValuesAsTypes || false,
     };
 
     this.outputAbsolutePath = path.resolve(this.options.outputPath);
@@ -101,6 +102,7 @@ export class EnvTypesPlugin {
         ADD_END: this.options.addExportEnds ? '1' : '0',
         INTERFACE: this.options.interface,
         NAMESPACE: this.options.namespace,
+        USE_VALUES_AS_TYPES: this.options.useValuesAsTypes ? '1' : '0',
       };
 
       execSync(`node ${this.options.generatorScript}`, {
