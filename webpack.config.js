@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
   entry: {
@@ -33,6 +34,22 @@ const config = {
   optimization: {
     minimize: false,
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'src/types',
+          to({ context, absoluteFilename }) {
+            // сохраняем структуру src → dist
+            return path.relative(
+              path.resolve(__dirname, 'src'),
+              absoluteFilename
+            );
+          },
+        },
+      ],
+    }),
+  ],
 };
 
 module.exports = config;

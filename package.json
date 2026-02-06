@@ -1,6 +1,6 @@
 {
   "name": "@xxanderwp/env-types-webpack-plugin",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Webpack plugin that automatically generates TypeScript definitions for environment variables from .env files",
   "main": "dist/EnvTypesPlugin.js",
   "types": "dist/EnvTypesPlugin.d.ts",
@@ -52,6 +52,7 @@
     "@types/webpack": "^5.28.5",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
+    "copy-webpack-plugin": "^13.0.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
