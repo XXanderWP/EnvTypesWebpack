@@ -1,7 +1,8 @@
 # EnvTypesWebpack
 <center>
 
-[![npm version](https://img.shields.io/npm/v/@xxanderwp/env-types-webpack-plugin.svg)](https://www.npmjs.com/package/EnvTypesWebpack)
+[![npm version](https://img.shields.io/npm/v/@xxanderwp/env-types-webpack-plugin.svg)](https://www.npmjs.com/package/@xxanderwp/env-types-webpack-plugin)
+![NPM Downloads](https://img.shields.io/npm/dm/%40xxanderwp%2Fenv-types-webpack-plugin)
 [![Tests](https://github.com/XXanderWP/EnvTypesWebpack/workflows/Tests/badge.svg)](https://github.com/XXanderWP/EnvTypesWebpack/actions)
 [![license](https://img.shields.io/github/license/XXanderWP/EnvTypesWebpack.svg)](https://github.com/XXanderWP/EnvTypesWebpack/blob/main/LICENSE)
 
